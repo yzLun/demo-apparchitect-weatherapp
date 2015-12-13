@@ -1,0 +1,22 @@
+//
+//  Headers.pch
+//  WeatherAppDemo
+//
+//  Created by yunzhi lun on 13/12/2015.
+//  Copyright © 2015 yunzhi_lun. All rights reserved.
+//
+
+#ifndef Headers_pch
+#define Headers_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+#endif /* Headers_pch */
+
+#import <MagicalRecord/MagicalRecord.h>
+#import "WADCommon.h"
+#import "WADConstants.h"
+#import "WADPersistentStoreManager.h"
