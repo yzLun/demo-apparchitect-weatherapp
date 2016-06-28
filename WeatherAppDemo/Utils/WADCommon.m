@@ -10,7 +10,9 @@
 
 @implementation WADCommon
 
-// Convenient functions
+/**
+ *  Convenient functions
+ */
 - (void)showAlertWithTitle:(NSString *)title message:(NSString *)message
 {
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:title
@@ -23,7 +25,9 @@
                                                          }];
     [alert addAction:cancelAction];
     
-    // Show alert on topest view of UIWindow
+    /**
+     Show alert on topest view of UIWindow
+     */
     UIWindow *alertWindow = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     alertWindow.rootViewController = [[UIViewController alloc] init];
     alertWindow.windowLevel = UIWindowLevelAlert + 1;

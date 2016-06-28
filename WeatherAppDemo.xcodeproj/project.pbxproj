@@ -647,10 +647,12 @@
 			baseConfigurationReference = 6FF31DD5069AFDCA2F264F55 /* Pods-WeatherAppDemoTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = WeatherAppDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunzhi.WeatherAppDemoTests;
 				PRODUCT_NAME = Weather;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Debug;
@@ -718,10 +720,12 @@
 			baseConfigurationReference = 900E9924A54B5331E3302569 /* Pods-WeatherAppDemoTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
 				INFOPLIST_FILE = WeatherAppDemoTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.yunzhi.WeatherAppDemoTests;
 				PRODUCT_NAME = Weather;
+				RUN_CLANG_STATIC_ANALYZER = YES;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Release;

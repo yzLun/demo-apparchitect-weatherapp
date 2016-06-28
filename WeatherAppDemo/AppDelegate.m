@@ -18,7 +18,9 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-    // Create a local database for MagicalRecord
+    /**
+     Create a local database for MagicalRecord
+     */
     [WADPersistentStoreManager initMagicalRecord];
     
     return YES;

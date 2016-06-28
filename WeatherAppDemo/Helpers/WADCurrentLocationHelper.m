@@ -51,7 +51,9 @@
 {
     CLLocation *currentLocation = newLocation;
     
-    // Save user current location in core data
+    /**
+     *  Save user current location in core data
+     */
     [self.storeManager saveUserLocation:currentLocation];
     
     [self.locationManager stopUpdatingLocation];

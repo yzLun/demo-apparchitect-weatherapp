@@ -31,6 +31,10 @@
 
 @implementation WADMainViewController
 
++ (void)load {
+    
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
@@ -38,30 +42,46 @@
     [self initMainViewModel];
     [self initLoadingIndicator];
     
-    // Getting current location
-    self.currentLocationHelper = [[WADCurrentLocationHelper alloc] initWithCommonClass:[WADCommon new] persistentStoreManager:[WADPersistentStoreManager new]];
+    /**
+     Getting current location
+     */
+    self.currentLocationHelper = [[WADCurrentLocationHelper alloc] initWithCommonClass:[[WADCommon alloc] init] persistentStoreManager:[[WADPersistentStoreManager alloc] init]];
     [self.currentLocationHelper startLocationService];
     
-    // Getting weather report from cloud
+    /**
+     *  Getting weather report from cloud
+     */
     typeof(self) __weak weakSelf = self;
     [self.currentLocationHelper setLocationUpdateComplete:^{
-        weakSelf.weatherService = (WADWeatherService *)[WADAPIClient serviceWithDefaultServiceClass:[WADWeatherService class]];
-        weakSelf.weatherService.userCurrentLocation = [User_Location getCurrentLocationDict];
+        /**
+         *  Avoid weak self was deallacted before this block got executed
+         */
+        typeof(weakSelf) __strong strongSelf = weakSelf;
+        strongSelf.weatherService = (WADWeatherService *)[WADAPIClient serviceWithDefaultServiceClass:[WADWeatherService class]];
+        strongSelf.weatherService.userCurrentLocation = [User_Location getCurrentLocationDict];
         
-        // Show loading indicator on right top
-        [weakSelf.spinner startAnimating];
+        /**
+         *  Show loading indicator on right top
+         */
+        [strongSelf.spinner startAnimating];
         
-        [weakSelf.weatherService getWeatherByLocationWithCompletion:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
+        [strongSelf.weatherService getWeatherByLocationWithCompletion:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
             if (!error) {
-                // Hide loading indicator
-                [weakSelf.spinner stopAnimating];
+                /**
+                 *  Hide loading indicator
+                 */
+                [strongSelf.spinner stopAnimating];
                 
-                // Process response data if returned value not null
+                /**
+                 *  Process response data if returned value not null
+                 */
                 [CurrentlyData saveCurrentlyData:responseObject[@"currently"]];
                 [DailyData saveDailyData:responseObject[@"daily"][@"data"]];
                 
-                // Blind new data to UI
-                [weakSelf updateWeatherData];
+                /**
+                 *  Blind new data to UI
+                 */
+                [strongSelf updateWeatherData];
             }
             else {
                 NSLog(@"%@", error);
@@ -75,7 +95,7 @@
 - (void)initMainViewModel
 {
     self.mainViewModel = [[WADMainViewModel alloc] initWithCurrentlyData:[CurrentlyData getCurrentlyData] dailyDataList:[DailyData getDailyData]];
-    self.mainViewModel.commonMethods = [WADCommon new];
+    self.mainViewModel.commonMethods = [[WADCommon alloc] init];
 }
 
 - (void)updateWeatherData
@@ -106,7 +126,9 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Dynamic row height coresponding to weather summary text height
+    /**
+     *  Dynamic row height corresponding to weather summary text height
+     */
     WADDailyInfoCell *currentDailyCell = (WADDailyInfoCell *)[self tableView:tableView cellForRowAtIndexPath:indexPath];
     return [self.mainViewModel getCurrentCellHeight:currentDailyCell];
 }
@@ -114,7 +136,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     WADDailyInfoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DailyCell"];
-    cell.commonMethods = [WADCommon new];
+    cell.commonMethods = [[WADCommon alloc] init];
     [cell configureCell:self.mainViewModel.dailyDataArr[indexPath.row]];
     
     return cell;

@@ -23,7 +23,9 @@
     return @"";
 }
 
-// Using AFNetworking to make service calls
+/**
+ *  Using AFNetworking to make service calls
+ */
 - (AFHTTPSessionManager *)setupHTTPrequestOperationManager
 {
     AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];

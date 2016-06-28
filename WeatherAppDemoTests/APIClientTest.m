@@ -42,7 +42,6 @@
     
     XCTestExpectation *completionExpectation = [self expectationWithDescription:@"async api call"];
     [self.weatherService getWeatherByLocationWithCompletion:^(NSURLSessionDataTask *task, id responseObject, NSError *error) {
-        NSLog(@"%@", responseObject);
         XCTAssertNotNil(responseObject, "Getting weather report from cloud successfully");
         [completionExpectation fulfill];
     }];

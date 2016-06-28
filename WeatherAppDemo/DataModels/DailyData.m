@@ -15,7 +15,9 @@
 {
     [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
         
-        // Remove current data and update with new data
+        /**
+         *  Remove current data and update with new data
+         */
         [self MR_truncateAllInContext:localContext];
         
         for (NSDictionary *item in responseArr)

@@ -13,7 +13,7 @@
 
 - (NSString*)apiHost:(NSString *)actions
 {
-    // Get baseURL depands on Debug or Release configuration
+    // Get baseURL depends on Debug or Release configuration
     WADConfiguration *env_config = [WADConfiguration defaultConfiguration];
     NSString *baseURL = [env_config settingForKey:@"baseURL"];
     NSString *apiKey = [env_config settingForKey:@"apiKey"];
